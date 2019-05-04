@@ -40,7 +40,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Migration Class
  *
- * All migrations should implement this, forces up() and down() and gives
+ * All migration should implement this, forces up() and down() and gives
  * access to the CI super-global.
  *
  * @package		CodeIgniter
@@ -84,10 +84,10 @@ class CI_Migration {
 	 *
 	 * @var string
 	 */
-	protected $_migration_table = 'migrations';
+	protected $_migration_table = 'migration';
 
 	/**
-	 * Whether to automatically run migrations
+	 * Whether to automatically run migration
 	 *
 	 * @var	bool
 	 */
@@ -128,14 +128,14 @@ class CI_Migration {
 
 		log_message('info', 'Migrations Class Initialized');
 
-		// Are they trying to use migrations while it is disabled?
+		// Are they trying to use migration while it is disabled?
 		if ($this->_migration_enabled !== TRUE)
 		{
 			show_error('Migrations has been loaded but is disabled or set up incorrectly.');
 		}
 
 		// If not set, set it
-		$this->_migration_path !== '' OR $this->_migration_path = APPPATH.'migrations/';
+		$this->_migration_path !== '' OR $this->_migration_path = APPPATH.'migration/';
 
 		// Add trailing slash if not set
 		$this->_migration_path = rtrim($this->_migration_path, '/').'/';
@@ -163,7 +163,7 @@ class CI_Migration {
 			show_error('An invalid migration numbering type was specified: '.$this->_migration_type);
 		}
 
-		// If the migrations table is missing, make it
+		// If the migration table is missing, make it
 		if ( ! $this->db->table_exists($this->_migration_table))
 		{
 			$this->dbforge->add_field(array(
@@ -191,7 +191,7 @@ class CI_Migration {
 	 * choice
 	 *
 	 * @param	string	$target_version	Target schema version
-	 * @return	mixed	TRUE if no migrations are found, current version string on success, FALSE on failure
+	 * @return	mixed	TRUE if no migration are found, current version string on success, FALSE on failure
 	 */
 	public function version($target_version)
 	{
@@ -222,7 +222,7 @@ class CI_Migration {
 		elseif ($target_version < $current_version)
 		{
 			$method = 'down';
-			// We need this so that migrations are applied in reverse order
+			// We need this so that migration are applied in reverse order
 			krsort($migrations);
 		}
 		else
@@ -231,7 +231,7 @@ class CI_Migration {
 			return TRUE;
 		}
 
-		// Validate all available migrations within our target range.
+		// Validate all available migration within our target range.
 		//
 		// Unfortunately, we'll have to use another loop to run them
 		// in order to avoid leaving the procedure in a broken state.
@@ -242,7 +242,7 @@ class CI_Migration {
 		{
 			// Ignore versions out of our range.
 			//
-			// Because we've previously sorted the $migrations array depending on the direction,
+			// Because we've previously sorted the $migration array depending on the direction,
 			// we can safely break the loop once we reach $target_version ...
 			if ($method === 'up')
 			{
@@ -297,7 +297,7 @@ class CI_Migration {
 			$pending[$number] = array($class, $method);
 		}
 
-		// Now just run the necessary migrations
+		// Now just run the necessary migration
 		foreach ($pending as $number => $migration)
 		{
 			log_message('debug', 'Migrating '.$method.' from version '.$current_version.' to version '.$number);
@@ -349,7 +349,7 @@ class CI_Migration {
 	/**
 	 * Sets the schema to the migration version set in config
 	 *
-	 * @return	mixed	TRUE if no migrations are found, current version string on success, FALSE on failure
+	 * @return	mixed	TRUE if no migration are found, current version string on success, FALSE on failure
 	 */
 	public function current()
 	{
@@ -379,7 +379,7 @@ class CI_Migration {
 	{
 		$migrations = array();
 
-		// Load all *_*.php files in the migrations path
+		// Load all *_*.php files in the migration path
 		foreach (glob($this->_migration_path.'*_*.php') as $file)
 		{
 			$name = basename($file, '.php');
