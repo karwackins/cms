@@ -69,9 +69,9 @@ class CI_Exceptions {
 		E_CORE_WARNING		=>	'Core Warning',
 		E_COMPILE_ERROR		=>	'Compile Error',
 		E_COMPILE_WARNING	=>	'Compile Warning',
-		E_USER_ERROR		=>	'User Error',
-		E_USER_WARNING		=>	'User Warning',
-		E_USER_NOTICE		=>	'User Notice',
+		E_USER_ERROR		=>	'cUser Error',
+		E_USER_WARNING		=>	'cUser Warning',
+		E_USER_NOTICE		=>	'cUser Notice',
 		E_STRICT		=>	'Runtime Notice'
 	);
 
