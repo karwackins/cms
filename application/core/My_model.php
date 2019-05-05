@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 /**
  * Created by PhpStorm.
  * User: karwackid
@@ -6,7 +7,39 @@
  * Time: 20:12
  */
 
-class My_model
+class My_model extends CI_Model
 {
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
+    public function get($table, $where = FALSE, $single = FALSE)
+    {
+        if($where == TRUE)
+        {
+            $this->db->where($where);
+            $date = $this->db->get($table);
+            return $date->row();
+        }
+            $date = $this->db->get($table);
+            return $date->result();
+    }
+
+    public function create($table, $data)
+    {
+        $this->db->insert($table, $data);
+    }
+
+    public function update($table, $where, $data)
+    {
+        $this->db->where($where);
+        $this->db->update($table, $data);
+    }
+
+    public function delete($table, $where)
+    {
+        $this->db->where($where);
+        $this->db->delete($table);
+    }
 }

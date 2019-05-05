@@ -6,6 +6,7 @@
 <h1></h1>
 
 <h3>Lista użytkowników</h3>
+<a href="create">Nowy użytkownik</a>
 
 <table>
     <tr>
@@ -15,15 +16,15 @@
         <td>Rola</td>
     </tr>
 
-    <?php foreach ($users->result() as $item):?>
+    <?php foreach ($users as $user):?>
 
         <?php echo '<tr>
-                        <td>'. $item->id.'</td>
-                        <td>'. $item->name.'</td>
-                        <td>'. $item->email.'</td>
-                        <td>'. $item->role.'</td>
-                        <td><a href="get/'.$item->id.'">Edytuj</a></td>
-                        <td><a href="delete/'.$item->id.'">Usuń</a></td>
+                        <td>'. $user->id.'</td>
+                        <td>'. $user->name.'</td>
+                        <td>'. $user->email.'</td>
+                        <td>'. $user->role.'</td>
+                        <td><a href="get/'.$user->id.'">Edytuj</a></td>
+                        <td><a href="delete/'.$user->id.'">Usuń</a></td>
                     </tr>';?>
 
     <?php endforeach;?>
