@@ -12,6 +12,7 @@ class cUser extends CI_Controller {
     {
         parent::__construct();
         $this->load->model('mUser');
+        $this->load->library('form_validation');
     }
 
     /**
@@ -29,32 +30,6 @@ class cUser extends CI_Controller {
     {
 
         if(!empty($_POST)) {
-            $this->load->library('form_validation');
-
-            $config = array(
-                array(
-                    'field' => 'name',
-                    'label' => 'Imię',
-                    'rules' => 'trim|required'
-                ),
-                array(
-                    'field' => 'password',
-                    'label' => 'Hasło',
-                    'rules' => 'trim|required|matches[passconf]',
-                ),
-                array(
-                    'field' => 'passconf',
-                    'label' => 'Powtórz hasło',
-                    'rules' => 'trim|required'
-                ),
-                array(
-                    'field' => 'email',
-                    'label' => 'Email',
-                    'rules' => 'trim|required|valid_email|is_unique[users.email]'
-                )
-            );
-
-            $this->form_validation->set_rules($config);
 
             $config = array(
                 'required' => 'Pole %s jest wymagane',
@@ -67,9 +42,8 @@ class cUser extends CI_Controller {
             $this->form_validation->set_message($config);
 
 
-            if ($this->form_validation->run() == FALSE) {
-
-            } else {
+            if ($this->form_validation->run('users_create') == TRUE)
+            {
                 $data = array(
                     'name' => $_POST['name'],
                     'email' => $_POST['email'],
@@ -95,16 +69,17 @@ class cUser extends CI_Controller {
 
     public function edit($id)
     {
-
-        $data = array(
-            'name' => $_POST['name'],
-            'email' => $_POST['email'],
-            'password' => $_POST['password'],
-            'role' => $_POST['role']
-        );
-        $where = array('id' => $id);
-        $this->mUser->update('users', $where, $data);
-        redirect('http://cms.local/Admin/cUser/');
+        if ($this->form_validation->run('users_edit') == TRUE) {
+            $data = array(
+                'name' => $_POST['name'],
+                'email' => $_POST['email'],
+                'password' => $_POST['password'],
+                'role' => $_POST['role']
+            );
+            $where = array('id' => $id);
+            $this->mUser->update('users', $where, $data);
+            redirect('http://cms.local/Admin/cUser/');
+        }
     }
 
     public function delete($id)
