@@ -16,14 +16,19 @@ class My_model extends CI_Model
 
     public function get($table, $where = FALSE, $single = FALSE)
     {
+
         if($where == TRUE)
         {
             $this->db->where($where);
-            $date = $this->db->get($table);
-            return $date->row();
+            $query = $this->db->get($table);
+            return $query->row();
+        } else
+        {
+            $query = $this->db->get($table);
+            return $query->result();
         }
-            $date = $this->db->get($table);
-            return $date->result();
+
+
     }
 
     public function create($table, $data)

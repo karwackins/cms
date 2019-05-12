@@ -28,7 +28,7 @@
                 )
             ?>
 
-            <td><?php echo form_dropdown('role', $options, 'cUser'); ?></td>
+            <td><?php echo form_dropdown('role', $options, 'User'); ?></td>
         </tr>
         <tr>
             <td></td>

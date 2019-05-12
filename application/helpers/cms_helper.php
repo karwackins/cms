@@ -8,5 +8,5 @@
 
 function pass_hash($string)
 {
-    return hash('sha512', $string . config_item('encryption_key'));
+    return hash('sha1', $string . config_item('encryption_key'));
 }
