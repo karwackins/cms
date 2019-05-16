@@ -1,5 +1,5 @@
 <?php echo validation_errors(); ?>
-<?php echo form_open('http://cms.local/Admin/cPanel/login'); ?>
+<?php echo form_open('http://cms.local/admin/cPanel/login'); ?>
 <table>
     <tr>
         <td>Email</td>

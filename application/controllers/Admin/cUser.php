@@ -21,7 +21,8 @@ class cUser extends CI_Controller {
     public function index()
     {
        $data['users'] = $this->mUser->get('users');
-       $this->load->view('Admin/vUsers', $data);
+       $data['loggedin'] = $this->loggedin();
+       $this->load->view('admin/user/vUsers', $data);
 
 
     }
@@ -54,17 +55,17 @@ class cUser extends CI_Controller {
                 $data['password'] = pass_hash($data['password']);
 
                 $this->mUser->create('users', $data);
-                redirect('http://cms.local/Admin/cUser/');
+                redirect('http://cms.local/admin/cUser/');
             }
         }
-        $this->load->view('Admin/vUser_create');
+        $this->load->view('admin/user/vUser_create');
     }
 
     public function get($id)
     {
         $where = array('id' => $id);
        $data['user'] = $this->mUser->get('users', $where);
-       $this->load->view('Admin/vUser_edit', $data);
+       $this->load->view('admin/user/vUser_edit', $data);
     }
 
     public function edit($id)
@@ -78,7 +79,7 @@ class cUser extends CI_Controller {
             );
             $where = array('id' => $id);
             $this->mUser->update('users', $where, $data);
-            redirect('http://cms.local/Admin/cUser/');
+            redirect('http://cms.local/admin/cUser/');
         }
     }
 
@@ -86,7 +87,7 @@ class cUser extends CI_Controller {
     {
         $where = array('id' => $id);
         $this->mUser->delete('users', $where);
-        redirect('http://cms.local/Admin/cUser/');
+        redirect('http://cms.local/admin/cUser/');
     }
 
 

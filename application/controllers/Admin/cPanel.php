@@ -17,13 +17,13 @@ class cPanel extends CI_Controller {
 
     public function index()
     {
-
-        echo "Panel admina";
+        $data['loggedin'] = $this->loggedin();
+        $this->load->view('admin/panel/index', $data);
     }
 
     public function login()
     {
-        $this->loggedin() == TRUE || redirect('http://cms.local/Admin/cPanel');
+        $this->loggedin() == FALSE || redirect('http://cms.local/admin/cPanel');
             if(!empty($_POST)) {
 
                 $config = array(
@@ -55,7 +55,7 @@ class cPanel extends CI_Controller {
                         );
 
                         $this->session->set_userdata($data);
-                        redirect('http://cms.local/Admin/cPanel');
+                        redirect('http://cms.local/admin/cPanel');
                     }
                     else
                     {
@@ -64,7 +64,7 @@ class cPanel extends CI_Controller {
                 }
 
             }
-            $this->load->view('Admin/panel/login');
+            $this->load->view('admin/panel/login');
 
     }
 

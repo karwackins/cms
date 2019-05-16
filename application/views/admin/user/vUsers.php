@@ -1,3 +1,6 @@
+<?php
+    include APPPATH . 'views/admin/include/header.php';
+?>
 <html>
 <head>
     <title></title>
@@ -6,7 +9,7 @@
 <h1></h1>
 
 <h3>Lista użytkowników</h3>
-<a href="create">Nowy użytkownik</a>
+<a href="cUser/create">Nowy użytkownik</a>
 
 <table>
     <tr>
@@ -23,8 +26,8 @@
                         <td>'. $user->name.'</td>
                         <td>'. $user->email.'</td>
                         <td>'. $user->role.'</td>
-                        <td><a href="get/'.$user->id.'">Edytuj</a></td>
-                        <td><a href="delete/'.$user->id.'">Usuń</a></td>
+                        <td><a href="cUser/get/'.$user->id.'">Edytuj</a></td>
+                        <td><a href="cUser/delete/'.$user->id.'">Usuń</a></td>
                     </tr>';?>
 
     <?php endforeach;?>
