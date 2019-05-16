@@ -6,13 +6,14 @@
  * Time: 08:20
  */
 
-class cUser extends CI_Controller {
+class cUser extends My_controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('mUser');
         $this->load->library('form_validation');
+        $this->loggedin() == TRUE || redirect('http://cms.local/admin/cPanel/login');
     }
 
     /**

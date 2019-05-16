@@ -6,13 +6,14 @@
  * Time: 23:10
  */
 
-class cPanel extends CI_Controller {
+class cPanel extends My_controller {
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model('mUser');
         $this->load->library('form_validation');
+
     }
 
     public function index()
@@ -66,17 +67,6 @@ class cPanel extends CI_Controller {
             }
             $this->load->view('admin/panel/login');
 
-    }
-
-    public function loggedin()
-    {
-        return !$this->session->userdata('logged');
-    }
-
-    public function logout()
-    {
-        session_destroy();
-        redirect('http://cms.local/Admin/login');
     }
 
 
